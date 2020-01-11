@@ -1,0 +1,25 @@
+{
+  "name": "randomquotemachine",
+  "version": "1.0.0",
+  "description": "none",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ssyctlm/RandomQuoteMachine.git"
+  },
+  "keywords": [
+    "abc123456"
+  ],
+  "author": "hahasmda",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ssyctlm/RandomQuoteMachine/issues"
+  },
+  "homepage": "https://github.com/ssyctlm/RandomQuoteMachine#readme",
+  "dependencies": {
+    "create-react-app": "^3.3.0"
+  }
+}
