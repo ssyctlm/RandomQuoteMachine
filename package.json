@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/ssyctlm/RandomQuoteMachine#readme",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.12.0",
+    "bootstrap": "^4.4.1",
     "create-react-app": "^3.3.0"
   }
 }
