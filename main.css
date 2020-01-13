@@ -4,11 +4,13 @@
     box-sizing: border-box;
 }
 
-#wrap {
+body {
     height: 100vh;
     overflow: hidden;
     background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 100%);
 }
+
+
 
 #image {
     display: block;
@@ -16,13 +18,8 @@
     max-height: 367px;
 }
 
-.app {
-    border: 1px solide red;
-    background: black;
-}
-
 #quote-box {
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.6);
     /* border:black solid 1px; */
     border-radius: 10px;
     min-height: 220px;

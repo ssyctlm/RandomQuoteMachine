@@ -8,44 +8,30 @@ class App extends React.Component {
     super();
     this.state = {
       quoteLst: [
-        {
-          quote: "I'm selfish, impatient and a little insecure. I make mistakes, I am out of control and at times hard to handle. But if you can't handle me at my worst, then you sure as hell don't deserve me at my best.",
-          character: "Marilyn Monroe"
-        },
-        {
-          quote: "Be yourself; everyone else is already taken.",
-          character: "Oscar Wilde"
-        },
-        {
-          quote: "Two things are infinite: the universe and human stupidity; and I'm not sure about the universe.",
-          character: "Albert Einstein"
-        },
-        {
-          quote: "So many books, so little time.",
-          character: "Frank Zappa"
-        },
       ],
       show: {
-        quote: 'Be yourself; everyone else is already taken.',
-        character: 'Oscar Wilde'
+        
       }
     }
     this.newQuote = this.newQuote.bind(this);
-    this.handleClick = this.handleClick.bind(this)
+    this.handleFetch = this.handleFetch.bind(this)
     this.changeBgColor = this.changeBgColor.bind(this)
   }
+
   newQuote = () => {
     const range = this.state.quoteLst.length;
     const ranIdx = Math.floor(Math.random() * range);
     const show = this.state.quoteLst[ranIdx];
-    this.setState(
+ 
+    console.log(this.state.quoteLst[ranIdx])
+    if(this.state.quoteLst[ranIdx]){this.setState(
       { show: show }
-    );
-    console.log(ranIdx)
-    console.log(this.state)
+    );}
+  
+    
   }
 
-  handleClick() {
+  handleFetch() {
     fetch(
       'https://thesimpsonsquoteapi.glitch.me/quotes?count=10'
     )
@@ -56,9 +42,7 @@ class App extends React.Component {
       })
       .catch(e => console.log('错误:', e))
   }
-  componentWillUnmount() {
-    console.log("async")
-  }
+
   changeBgColor = () => {
     const r = Math.floor(Math.random() * 255);
     const g = Math.floor(Math.random() * 255);
@@ -68,16 +52,30 @@ class App extends React.Component {
     const b1 = Math.floor(Math.random() * 255);
 
     return {
-      backgroundImage: 'linear-gradient(to top, rgba(' + r1 + ',' + g1 + ',' + b1 + ',0.2) 0%, rgba(' + r + ',' + g + ',' + b + ',0.6) 100%)'
+      backgroundImage: 'linear-gradient(to top, rgba(' + r1 + ',' + g1 + ',' + b1 + ',0.2) 0%, rgba(' + r + ',' + g + ',' + b + ',0.6) 100%)',
+      // backgroundImage: 'linear-gradient(to top, rgba(${r1},${g1},${b1},0.2) 0%, rgba(${r},${g},${b},0.6) 100%)',
     }
+  }
+  UNSAFE_componentWillMount(){
+    fetch(
+      'https://thesimpsonsquoteapi.glitch.me/quotes?count=10'
+    )
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        this.setState({ quoteLst: data })
+      })
+      .catch(e => console.log('错误:', e));
 
   }
+
 
   render() {
     return (
       <div id="wrap" style={this.changeBgColor()}>
         <div id="quote-box" className="wrapper">
           <p id="text"><i className="fas fa-quote-left"></i>{this.state.show.quote}</p>
+          <img id="image" src={this.state.show.image} alt={this.state.show.character}></img>
           <p id="author">author--{this.state.show.character}</p>
           <div className="row">
             <div className="col-7 ">
@@ -87,7 +85,7 @@ class App extends React.Component {
             </div>
 
             <button id="new-quote" className="btn btn-dark" onClick={this.newQuote}>New quote</button>
-            <button className="btn btn-primary fetch" onClick={this.handleClick}>fetch</button>
+            <button className="btn btn-primary fetch" onClick={this.handleFetch}>fetch</button>
           </div>
         </div>
       </div>

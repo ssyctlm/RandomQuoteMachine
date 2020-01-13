@@ -10,12 +10,62 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <script>
+        window.onload = function () {
+            // SELECTOR
+            let quote = document.getElementById('text');
+            let author = document.getElementById('author')
+            let quoteBtn = document.getElementById('new-quote')
+            let pic = document.getElementById('image')
+            let bg = document.getElementById("wrap")
+            // Function 
+            //FETCH FROM API
+            let randomQ = () => {
+                fetch("https://thesimpsonsquoteapi.glitch.me/quotes").then(
+                    function (res) {
+                        return res.json()
+                    }
+                ).then(function ([data]) {
+                    // console.log(data)
+                    quote.innerHTML = '<i class="fas fa-quote-left"></i>' + data.quote;
+                    author.innerHTML = 'author: ' + data.character;
+                    pic.src = data.image;
+                    pic.alt = data.character;
+
+                }).catch(error => quote.innerHTML = error)
+            };
+            //random RGB;
+            const changeBg = () => {
+                let r = Math.floor(Math.random() * 255);
+                let g = Math.floor(Math.random() * 255);
+                let b = Math.floor(Math.random() * 255);
+                let r1 = Math.floor(Math.random() * 255);
+                let g1 = Math.floor(Math.random() * 255);
+                let b1 = Math.floor(Math.random() * 255);
+
+
+                bg.style.backgroundImage = 'linear-gradient(45deg, rgba(' + r1 + ',' + g1 + ',' + b1 +
+                    ',0.4) 0%, rgba(' +
+                    r + ',' + g +
+                    ',' + b + ',0.6) 100%)'
+            }
+            changeBg()
+            randomQ()
+            quoteBtn.onclick = () => {
+                randomQ();
+                changeBg();
+            }
+
+            // quote.innerHTML = toString(randomFetch)
+        }
+    </script>
 </head>
 
-<body>
+<body id="wrap">
     <div id="quote-box" class="wrapper">
         <p id="text"><i class="fas fa-quote-left"></i></p>
-        <p id="author">author:NEWPEOPLE</p>
+        <img id="image" src="" alt="">
+        <p id="author"></p>
         <div class="row">
             <div class="col-9">
                 <div class="btn btn-dark twitter">
