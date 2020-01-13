@@ -10,7 +10,7 @@ class App extends React.Component {
       quoteLst: [
       ],
       show: {
-        
+
       }
     }
     this.newQuote = this.newQuote.bind(this);
@@ -22,13 +22,15 @@ class App extends React.Component {
     const range = this.state.quoteLst.length;
     const ranIdx = Math.floor(Math.random() * range);
     const show = this.state.quoteLst[ranIdx];
- 
-    console.log(this.state.quoteLst[ranIdx])
-    if(this.state.quoteLst[ranIdx]){this.setState(
-      { show: show }
-    );}
-  
-    
+
+    // console.log(this.state.quoteLst[ranIdx])
+    if (this.state.quoteLst[ranIdx]) {
+      this.setState(
+        { show: show }
+      );
+    }
+
+
   }
 
   handleFetch() {
@@ -37,8 +39,9 @@ class App extends React.Component {
     )
       .then(res => res.json())
       .then(data => {
-        console.log(data)
+        // console.log(data)
         this.setState({ quoteLst: data })
+        this.newQuote()
       })
       .catch(e => console.log('错误:', e))
   }
@@ -56,17 +59,8 @@ class App extends React.Component {
       // backgroundImage: 'linear-gradient(to top, rgba(${r1},${g1},${b1},0.2) 0%, rgba(${r},${g},${b},0.6) 100%)',
     }
   }
-  UNSAFE_componentWillMount(){
-    fetch(
-      'https://thesimpsonsquoteapi.glitch.me/quotes?count=10'
-    )
-      .then(res => res.json())
-      .then(data => {
-        console.log(data)
-        this.setState({ quoteLst: data })
-      })
-      .catch(e => console.log('错误:', e));
-
+  UNSAFE_componentWillMount() {
+    this.handleFetch()
   }
 
 
