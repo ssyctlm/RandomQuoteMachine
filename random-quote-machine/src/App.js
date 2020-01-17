@@ -33,6 +33,8 @@ class App extends React.Component {
 
   }
 
+//=====>Fetch data from API<=====
+//method 1
   handleFetch() {
     fetch(
       'https://thesimpsonsquoteapi.glitch.me/quotes?count=10'
@@ -45,6 +47,21 @@ class App extends React.Component {
       })
       .catch(e => console.log('错误:', e))
   }
+//method 2
+  // async handleFetch() {
+  //   const url = 'https://thesimpsonsquoteapi.glitch.me/quotes?count=10'
+  //   try{
+  //   const resp = await fetch(
+  //     url
+  //   );
+  //   const data = await resp.json();
+  //   await this.setState( {quoteLst:data})
+  //   await this.newQuote()}
+  //   catch(e){
+  //     console.log(`错误： ${e}`)
+  //   }
+  // }
+
 
   changeBgColor = () => {
     const r = Math.floor(Math.random() * 255);
@@ -63,12 +80,19 @@ class App extends React.Component {
     this.handleFetch()
   }
 
+  
+  
+  
+
+    
+  
+
 
   render() {
     return (
       <div id="wrap" style={this.changeBgColor()}>
         <div id="quote-box" className="wrapper">
-          <p id="text"><i className="fas fa-quote-left"></i>{this.state.show.quote}</p>
+          <p id="text"><i className="fas fa-quote-left"></i>{this.state.quoteLst.length? this.state.show.quote : `Error,can't fetch data`}</p>
           <img id="image" src={this.state.show.image} alt={this.state.show.character}></img>
           <p id="author">author--{this.state.show.character}</p>
           <div className="row">
